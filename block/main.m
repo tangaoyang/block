@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+/*
 @class MyObject;
 
 typedef int (^Block)(int, int);
@@ -67,9 +67,62 @@ typedef int (^Block)(int, int);
 }
 
 @end
-
+*/
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
+        
+        // block无参无返回值
+        /*
+        __block int a = 0;    // block类型对象并且在block里使用+打印
+        static int b = 1;     // 全局变量并且在block里使用+打印
+        static int c = 2;     // 全局变量并且在block里使用
+        static int d = 3;     // 全局变量并且没在block里使用
+        __block int e = 4;    // block类型对象并且没在block里使用
+        
+        void (^blk)(void) = ^{
+            a++;
+            b++;
+            c++;
+            NSLog(@"%d %d", a, b);
+        };
+        
+        blk();
+        */
+        
+        // block有参无返回值
+        /*
+        int a = 0;
+        void (^blk)(int) = ^(int t) {
+            NSLog(@"%d", t);
+        };
+        blk(2);
+        blk(a);
+        */
+        
+        // block无参有返回值
+        /*
+        int b = 0;
+        int (^blk)(void) = ^{
+            return b;
+        };
+        
+        int a = blk();
+        NSLog(@"%d", a);
+        */
+        
+        // block有参有返回值
+        /*
+        int b = 0;
+        int c = 2;
+        int (^blk)(int) = ^(int a) {
+            return b + a;
+        };
+        
+        int t = blk(1);
+        int h = blk(c);
+        NSLog(@"%d %d", t, h);
+        */
+        
         //block类型
         /*
         int a = 0;
@@ -99,6 +152,11 @@ int main(int argc, const char * argv[]) {
 //        blk();
 //        NSLog(@"%@", [blk class]);
         
+        
+        
+        
+        // block使用
+        /*
         MyObject *o = [[MyObject alloc] init];
         [o useBlock];
 //        o.aBlock = ^int(int a) {
@@ -118,7 +176,7 @@ int main(int argc, const char * argv[]) {
         o.doContinueBlock(1).doContinueBlock(2).doContinueBlock(3);
         NSLog(@"result:%d",o.result);
         
-        
+        */
     }
     return 0;
 }
