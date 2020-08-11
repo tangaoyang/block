@@ -68,6 +68,15 @@ typedef int (^Block)(int, int);
 
 @end
 */
+
+typedef int (^Block)(int, int);
+
+- (Block)returnBlock {
+    return ^(int a, int b) {
+        return a + b;
+    };
+}
+
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         
@@ -136,13 +145,14 @@ int main(int argc, const char * argv[]) {
         NSLog(@"[blk_on_stack class] == %@", [blk_on_stack class]);
         NSLog(@"[blk_on_heap class] == %@", [blk_on_heap class]);
          */
+        
         //block作为函数返回
-        /*
+        
         Block blk = useBlk();
         
         blk();
         NSLog(@"%@", [blk class]);
-         */
+        
         
         //将__block赋值给 __strong指针
 //        int a = 0;
