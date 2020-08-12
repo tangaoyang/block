@@ -7,49 +7,74 @@
 //
 
 #import <Foundation/Foundation.h>
-/*
-@class MyObject;
+typedef void (^Block)(void);
 
-typedef int (^Block)(int, int);
+@interface Person : NSObject
 
-@interface MyObject : NSObject
-
-// 定义一个block然后使用
-@property (nonatomic, strong) int (^aBlock)(int a);
-@property (nonatomic, assign) int result;
-
-// block作为参数
-- (int)doBlock: (Block)blk;
-// block作为返回值
-- (Block)returnBlock;
-//block作为出参的应用
-- (MyObject *(^)(int param))doContinueBlock;
+@property (nonatomic, assign) int age;
 
 @end
 
+@implementation Person
+
+
+
+@end
+
+
+/*
+@class MyObject;
+
+
+
+typedef int (^OneType)(int);
+
+OneType func(int t) {
+    return ^(int a) {
+        return a + t;
+    };
+}
+
+
+
+@interface MyObject : NSObject
+*/
+// 定义一个block然后使用
+//@property (nonatomic, strong) int (^aBlock)(int a);
+//@property (nonatomic, assign) int result;
+
+// block作为参数
+//- (int)doBlock: (Block)blk;
+// block作为返回值
+//- (Block)returnBlock;
+//block作为出参的应用
+//- (MyObject *(^)(int param))doContinueBlock;
+/*
+@end
+
 @implementation MyObject
+*/
+//- (id)init {
+//    self = [super init];
 
-- (id)init {
-    self = [super init];
-    
 //    __block id tmp = self;
-    _aBlock = ^int(int a) {
-        return a;
-    };
+//    _aBlock = ^int(int a) {
+//        return a;
+//    };
     
-    return self;
-}
+//    return self;
+//}
 
-- (int)doBlock:(Block)blk {
-    return blk(1, 2);
-}
+//- (int)doBlock:(Block)blk {
+//    return blk(1, 2);
+//}
 
-- (Block)returnBlock {
-    return ^(int a, int b) {
-        return a + b;
-    };
-}
-
+//- (Block)returnBlock {
+//    return ^(int a, int b) {
+//        return a + b;
+//    };
+//}
+/*
 - (void)useBlock {
     int num = _aBlock(1);
     NSLog(@"useBlock -- %d", num);
@@ -65,17 +90,8 @@ typedef int (^Block)(int, int);
         return self;
     };
 }
-
-@end
 */
-
-typedef int (^Block)(int, int);
-
-- (Block)returnBlock {
-    return ^(int a, int b) {
-        return a + b;
-    };
-}
+//@end
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
@@ -147,12 +163,12 @@ int main(int argc, const char * argv[]) {
          */
         
         //block作为函数返回
-        
+        /*
         Block blk = useBlk();
         
         blk();
         NSLog(@"%@", [blk class]);
-        
+        */
         
         //将__block赋值给 __strong指针
 //        int a = 0;
@@ -166,27 +182,36 @@ int main(int argc, const char * argv[]) {
         
         
         // block使用
-        /*
-        MyObject *o = [[MyObject alloc] init];
-        [o useBlock];
-//        o.aBlock = ^int(int a) {
-//            return a + 10;
-//        };
-        NSLog(@"aBlock(3) -- %d", o.aBlock(3));
+       
+//        MyObject *o = [[MyObject alloc] init];
+//        [o useBlock];
+////        o.aBlock = ^int(int a) {
+////            return a + 10;
+////        };
+//        NSLog(@"aBlock(3) -- %d", o.aBlock(3));
+//
+//        NSLog(@"doBlock -- %d", [o doBlock:^int(int a, int b) {
+//            return a + b;
+//        }]);
         
-        NSLog(@"doBlock -- %d", [o doBlock:^int(int a, int b) {
-            return a + b;
-        }]);
-        
-        int (^blk)(int a, int b) = [o returnBlock];
-        NSLog(@"returnBlock -- %d", blk(1, 5));
+//        int (^blk)(int a, int b) = [o returnBlock];
+//        NSLog(@"returnBlock -- %d", blk(1, 5));
         
         //block出参应用
-        o.result = 1;
-        o.doContinueBlock(1).doContinueBlock(2).doContinueBlock(3);
-        NSLog(@"result:%d",o.result);
+//        o.result = 1;
+//        o.doContinueBlock(1).doContinueBlock(2).doContinueBlock(3);
+//        NSLog(@"result:%d",o.result);
         
-        */
+        Block block;
+        {
+            Person *person = [[Person alloc] init];
+            person.age = 10;
+            block = ^{
+                NSLog(@"%d", person.age);
+            };
+        }
+        block();
+        NSLog(@"1111111");
     }
     return 0;
 }
